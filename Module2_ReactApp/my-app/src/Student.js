@@ -1,5 +1,4 @@
 function Student({class:c, data:d}) { // Props = {class, data}
-    
     return (
         <div>
             <h2>List of Students - {c}</h2>
