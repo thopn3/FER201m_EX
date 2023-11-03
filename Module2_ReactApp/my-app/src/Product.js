@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, Row, Card, ListGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function Product() {
     const [products, setProducts] = useState([]);
@@ -7,13 +8,13 @@ export default function Product() {
 
     useEffect(() => {
         // Goi API tai URL: https://dummyjson.com/products
-        fetch("https://dummyjson.com/products")
+        fetch("http://localhost:9999/products")
             .then(res => res.json())
             .then(data => {
                 if(search.length == 0)
-                    setProducts(data.products);
+                    setProducts(data);
                 else
-                    setProducts(data.products.filter(p=>p.title.startsWith(search)));
+                    setProducts(data.filter(p=>p.title.startsWith(search)));
             });
     }, [search]);
 
@@ -28,6 +29,11 @@ export default function Product() {
                         style={{lineHeight:'30px', width:'50%', borderRadius:"5px", fontSize:'20px'}}
                         onChange={e=>setSearch(e.target.value)}
                         />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Link to={'/products/add'}>Add new</Link>
                 </Col>
             </Row>
             <Row>
